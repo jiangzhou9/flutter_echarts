@@ -21,6 +21,7 @@ class Echarts extends StatefulWidget {
     Key? key,
     required this.option,
     this.extraScript = '',
+    this.extraAfterScript = '',
     this.onMessage,
     this.extensions = const [],
     this.theme,
@@ -34,6 +35,8 @@ class Echarts extends StatefulWidget {
   final String option;
 
   final String extraScript;
+
+  final String extraAfterScript;
 
   final void Function(String message)? onMessage;
 
@@ -89,6 +92,7 @@ class _EchartsState extends State<Echarts> {
       var chart = echarts.init(document.getElementById('chart'), $themeStr);
       ${this.widget.extraScript}
       chart.setOption($_currentOption, true);
+      ${this.widget.extraAfterScript}
     ''');
     if (widget.onLoad != null) {
       widget.onLoad!(_controller!);
